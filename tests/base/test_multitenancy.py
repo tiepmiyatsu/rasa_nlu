@@ -43,14 +43,14 @@ def app(component_builder):
 
 
 @pytest.mark.parametrize("response_test", [
-    ResponseTest(
-            "http://dummy-uri/parse?q=food&project=test_project_mitie",
-            {"entities": [], "intent": "affirm", "text": "food"}
-    ),
-    ResponseTest(
-            "http://dummy-uri/parse?q=food&project=test_project_mitie_sklearn",
-            {"entities": [], "intent": "restaurant_search", "text": "food"}
-    ),
+    # ResponseTest(
+    #         "http://dummy-uri/parse?q=food&project=test_project_mitie",
+    #         {"entities": [], "intent": "affirm", "text": "food"}
+    # ),
+    # ResponseTest(
+    #         "http://dummy-uri/parse?q=food&project=test_project_mitie_sklearn",
+    #         {"entities": [], "intent": "restaurant_search", "text": "food"}
+    # ),
     ResponseTest(
             "http://dummy-uri/parse?q=food&project=test_project_spacy_sklearn",
             {"entities": [], "intent": "restaurant_search", "text": "food"}
@@ -84,16 +84,16 @@ def test_get_parse_invalid_model(app, response_test):
 
 
 @pytest.mark.parametrize("response_test", [
-    ResponseTest(
-            "http://dummy-uri/parse",
-            {"entities": [], "intent": "affirm", "text": "food"},
-            payload={"q": "food", "project": "test_project_mitie"}
-    ),
-    ResponseTest(
-            "http://dummy-uri/parse",
-            {"entities": [], "intent": "restaurant_search", "text": "food"},
-            payload={"q": "food", "project": "test_project_mitie_sklearn"}
-    ),
+    # ResponseTest(
+    #         "http://dummy-uri/parse",
+    #         {"entities": [], "intent": "affirm", "text": "food"},
+    #         payload={"q": "food", "project": "test_project_mitie"}
+    # ),
+    # ResponseTest(
+    #         "http://dummy-uri/parse",
+    #         {"entities": [], "intent": "restaurant_search", "text": "food"},
+    #         payload={"q": "food", "project": "test_project_mitie_sklearn"}
+    # ),
     ResponseTest(
             "http://dummy-uri/parse",
             {"entities": [], "intent": "restaurant_search", "text": "food"},
@@ -165,5 +165,5 @@ def train_models(component_builder, data):
         trainer.persist("test_projects", project_name=project_name)
 
     train("sample_configs/config_spacy.yml", "test_project_spacy_sklearn")
-    train("sample_configs/config_mitie.yml", "test_project_mitie")
-    train("sample_configs/config_mitie_sklearn.yml", "test_project_mitie_sklearn")
+    # train("sample_configs/config_mitie.yml", "test_project_mitie")
+    # train("sample_configs/config_mitie_sklearn.yml", "test_project_mitie_sklearn")

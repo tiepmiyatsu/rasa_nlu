@@ -366,6 +366,8 @@ class ComponentBuilder(object):
         if (cache_key is not None
                 and self.use_cache
                 and cache_key in self.component_cache):
+            print('fetching cached', component_name, model_metadata.metadata)
+            print('component_cache', cache_key, self.component_cache)
             return self.component_cache[cache_key], cache_key
         else:
             return None, cache_key

@@ -155,8 +155,13 @@ class Trainer(object):
         # Transform the passed names of the pipeline components into classes
         for component_name in cfg.component_names:
             component = component_builder.create_component(
-                    component_name, cfg)
-            pipeline.append(component)
+                component_name, cfg)
+            if component_name == 'nlp_spacy':
+                print('building pipeline element nlp_spacy, type: `{}`, '
+                      'content: {}, component config: {}'.format(type(cfg),
+                                                                 cfg.as_dict(),
+                                                                 component.component_config))
+                pipeline.append(component)
 
         return pipeline
 

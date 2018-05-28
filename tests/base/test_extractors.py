@@ -120,38 +120,6 @@ def test_crf_json_from_non_BILOU(spacy_nlp, ner_crf_pos_feature_config):
                      'value': 'by', 'entity': 'where'}
 
 
-def test_duckling_entity_extractor(component_builder):
-    _config = RasaNLUModelConfig({"pipeline": [{"name": "ner_duckling"}]})
-    _config.set_component_attr("ner_duckling", dimensions=["time"])
-    duckling = component_builder.create_component("ner_duckling", _config)
-    message = Message("Today is the 5th of May. Let us meet tomorrow.")
-    duckling.process(message)
-    entities = message.get("entities")
-    assert len(entities) == 3
-
-    # Test duckling with a defined date
-
-    # 1381536182000 == 2013/10/12 02:03:02
-    message = Message("Let us meet tomorrow.", time="1381536182000")
-    duckling.process(message)
-    entities = message.get("entities")
-    assert len(entities) == 1
-    assert entities[0]["text"] == "tomorrow"
-    assert entities[0]["value"] == "2013-10-13T00:00:00.000Z"
-
-
-def test_duckling_entity_extractor_and_synonyms(component_builder):
-    _config = RasaNLUModelConfig({"pipeline": [{"name": "ner_duckling"}]})
-    _config.set_component_attr("ner_duckling", dimensions=["number"])
-    duckling = component_builder.create_component("ner_duckling", _config)
-    synonyms = component_builder.create_component("ner_synonyms", _config)
-    message = Message("He was 6 feet away")
-    duckling.process(message)
-    # checks that the synonym processor can handle entities that have int values
-    synonyms.process(message)
-    assert message is not None
-
-
 def test_unintentional_synonyms_capitalized(component_builder):
     _config = utilities.base_test_conf("spacy_sklearn")
     ner_syn = component_builder.create_component("ner_synonyms", _config)

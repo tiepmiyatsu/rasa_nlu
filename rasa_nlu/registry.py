@@ -130,6 +130,8 @@ def load_component_by_name(component_name,  # type: Text
     previously persisted model."""
 
     component_clz = get_component_class(component_name)
+    print('loading component', component_name, metadata.metadata)
+    print('cached {}'.format(cached_component))
     return component_clz.load(model_dir, metadata, cached_component, **kwargs)
 
 
@@ -139,4 +141,5 @@ def create_component_by_name(component_name, config):
     previously persisted model."""
 
     component_clz = get_component_class(component_name)
+    print('creating component', component_name, config.as_dict())
     return component_clz.create(config)

@@ -72,6 +72,7 @@ class SpacyNLP(Component):
 
         nlp = spacy.load(spacy_model_name, parser=False)
         cls.ensure_proper_language_model(nlp)
+        print('creating spacynlp', cls.name, component_conf)
         return SpacyNLP(component_conf, nlp)
 
     @classmethod
@@ -117,12 +118,14 @@ class SpacyNLP(Component):
         # type: (Text, Metadata, Optional[SpacyNLP], **Any) -> SpacyNLP
         import spacy
 
+        print('spacynlp cached status', cached_component)
+
         if cached_component:
             return cached_component
 
         component_meta = model_metadata.for_component(cls.name)
+        print('loading spacynlp', component_meta)
         model_name = component_meta.get("model")
-
         nlp = spacy.load(model_name, parser=False)
         cls.ensure_proper_language_model(nlp)
         return cls(component_meta, nlp)
