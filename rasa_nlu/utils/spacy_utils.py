@@ -118,8 +118,6 @@ class SpacyNLP(Component):
         # type: (Text, Metadata, Optional[SpacyNLP], **Any) -> SpacyNLP
         import spacy
 
-        print('spacynlp cached status', cached_component)
-
         if cached_component:
             return cached_component
 

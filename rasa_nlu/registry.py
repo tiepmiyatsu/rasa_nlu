@@ -131,7 +131,6 @@ def load_component_by_name(component_name,  # type: Text
 
     component_clz = get_component_class(component_name)
     print('loading component', component_name, metadata.metadata)
-    print('cached {}'.format(cached_component))
     return component_clz.load(model_dir, metadata, cached_component, **kwargs)
 
 
